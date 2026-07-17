@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "motion/react";
 import { FcGoogle } from "react-icons/fc";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../utils/firebase";
 
 function Feature({ icon, title, des }) {
   return (
@@ -29,6 +31,17 @@ function Feature({ icon, title, des }) {
 }
 
 const Auth = () => {
+  const handelGoggleAuth = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      const name = response.user.displayName;
+      const email = response.user.email;
+      console.log(response);
+    } catch (error) {
+      console.error("Error during Google authentication:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-white text-black px-8">
       <motion.header
@@ -67,6 +80,7 @@ const Auth = () => {
               stiffness: 200,
               damping: 18,
             }}
+            onClick={handelGoggleAuth}
             className="mt-10 px-10 py-3 rounded-xl flex items-center gap-3 font-semibold text-lg  text-white
             bg-linear-to-r from-black/90 via-black/80 to-black/90 border
              border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
