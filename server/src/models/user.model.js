@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -16,25 +15,9 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Please provide a valid email address"],
     },
-
-    // password: {
-    //   type: String,
-    //   required: [true, "Password is required"],
-    //   minlength: [6, "Password must be at least 6 characters long"],
-    // },
-    // role: {
-    //   type: String,
-    //   enum: ["user", "admin", "moderator"],
-    //   default: "user",
-    // },
-    // isActive: {
-    //   type: Boolean,
-    //   default: true,
-    // },
-    
     credits: {
       type: Number,
-      default: 50,
+      default: 100,
       min: 0,
     },
     isCreditsAvailable: {
@@ -52,6 +35,22 @@ const userSchema = new mongoose.Schema(
   },
 );
 
-const userModel = mongoose.model("userModel", userSchema);
-export default userModel;
-// module.exports = userModel;
+const UserModel = mongoose.model("UserModel", userSchema);
+export default UserModel;
+
+// module.exports = UserModel;
+
+// password: {
+//   type: String,
+//   required: [true, "Password is required"],
+//   minlength: [6, "Password must be at least 6 characters long"],
+// },
+// role: {
+//   type: String,
+//   enum: ["user", "admin", "moderator"],
+//   default: "user",
+// },
+// isActive: {
+//   type: Boolean,
+//   default: true,
+// },
