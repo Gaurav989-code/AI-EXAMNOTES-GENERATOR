@@ -3,6 +3,8 @@ import { motion } from "motion/react";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../utils/firebase";
+import axios from "axios";
+import { serverUrl } from "../App";
 
 function Feature({ icon, title, des }) {
   return (
@@ -34,9 +36,18 @@ const Auth = () => {
   const handelGoggleAuth = async () => {
     try {
       const response = await signInWithPopup(auth, provider);
-      const name = response.user.displayName;
-      const email = response.user.email;
-      console.log(response);
+      const user = response.user;
+      const name = user.displayName;
+      const email = user.email;
+
+      const res = await axios.post(
+        `${serverUrl}/api/auth/google`,
+        { name, email },
+        { withCredentials: true },
+      );
+
+      console.log(res.data);
+      // console.log(response);
     } catch (error) {
       console.error("Error during Google authentication:", error);
     }
