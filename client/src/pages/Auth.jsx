@@ -5,6 +5,8 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../utils/firebase";
 import axios from "axios";
 import { serverUrl } from "../App";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../redux/userSlice";
 
 function Feature({ icon, title, des }) {
   return (
@@ -33,6 +35,8 @@ function Feature({ icon, title, des }) {
 }
 
 const Auth = () => {
+  const dispatch = useDispatch();
+
   const handelGoggleAuth = async () => {
     try {
       const response = await signInWithPopup(auth, provider);
@@ -46,7 +50,9 @@ const Auth = () => {
         { withCredentials: true },
       );
 
-      console.log(res.data);
+      dispatch(setUserData(res.data));
+
+      // console.log(res.data);
       // console.log(response);
     } catch (error) {
       console.error("Error during Google authentication:", error);
