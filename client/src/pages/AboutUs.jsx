@@ -40,7 +40,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-black text-white px-6 pt-32 pb-20">
+    <main className="min-h-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] px-6 pt-32 pb-20">
       {/* Decorative Top Radial Glow Accent */}
       <div className="absolute top-0 left-1/2 -z-10 h-[500px] w-full max-w-7xl -translate-x-1/2 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.08),transparent_65%)]" />
 
