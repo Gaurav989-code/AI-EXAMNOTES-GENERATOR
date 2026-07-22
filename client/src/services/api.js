@@ -13,3 +13,27 @@ export const getCurrentUser = async (dispatch) => {
     console.error("Error during user fetch:", error);
   }
 };
+
+export const generateNotes = async (payload) => {
+  try {
+    console.log("Sending Payload:", payload);
+
+    const res = await axios.post(
+      `${serverUrl}/api/notes/generate-notes`,
+      payload,
+      {
+        withCredentials: true,
+      },
+    );
+
+    console.log("Response:", res.data);
+
+    return res.data;
+  } catch (error) {
+    console.error("Status:", error.response?.status);
+    console.error("Response:", error.response?.data);
+    console.error(error);
+
+    throw error;
+  }
+};

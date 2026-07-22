@@ -1,5 +1,6 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -8,7 +9,6 @@ import authRouter from "./src/routes/auth.route.js";
 import userRouter from "./src/routes/user.route.js";
 import notesRouter from "./src/routes/generate.routes.js";
 
-dotenv.config();
 connectDB();
 
 const app = express();
@@ -34,7 +34,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/notes", notesRouter);
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -14,27 +14,19 @@ export const generateNotes = async (req, res) => {
       includeChart,
     } = req.body;
 
-    if (!topic || !topic.trim()) {
+    if (!topic?.trim()) {
       return res.status(400).json({
         success: false,
-        message: "Topic subject is required to generate AI notes.",
+        message: "Topic is required",
       });
     }
 
     const user = await UserModel.findById(req.userId);
+
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "User profile context not found.",
-      });
-    }
-
-    if (user.credits < 10) {
-      user.isCreditsAvailable = false;
-      await user.save();
-      return res.status(403).json({
-        success: false,
-        message: "Insufficient credits. Please upgrade your balance plan.",
+        message: "User not found",
       });
     }
 
@@ -49,6 +41,8 @@ export const generateNotes = async (req, res) => {
 
     const aiGeneratedData = await generateGeminiResponse(formattedPrompt);
 
+    console.dir(aiGeneratedData, { depth: null });
+
     const newNote = await NotesModel.create({
       user: user._id,
       topic,
@@ -60,31 +54,30 @@ export const generateNotes = async (req, res) => {
       content: aiGeneratedData,
     });
 
-    user.credits -= 10;
-    if (user.credits <= 0) {
-      user.isCreditsAvailable = false;
-    }
+    console.log("Note Created");
+    console.log(newNote._id);
 
-    if (!Array.isArray(user.notes)) {
-      user.notes = []; 
-    }
+    user.credits -= 10;
     user.notes.push(newNote._id);
+
     await user.save();
 
     return res.status(201).json({
       success: true,
-      message: "AI notes compiled successfully.",
-      noteId: newNote._id, 
-      creditsLeft: user.credits,
       data: newNote,
     });
-
   } catch (error) {
-    console.error("Critical Generation Controller Error:", error);
+    console.log("========== ERROR ==========");
+    console.error(error);
+    console.error(error.stack);
+
+    if (error.errors) {
+      console.dir(error.errors, { depth: null });
+    }
+
     return res.status(500).json({
       success: false,
-      message: "Internal server error occurred processing request.",
-      error: error.message,
+      message: error.message,
     });
   }
 };
