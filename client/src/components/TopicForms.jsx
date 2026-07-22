@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   FiBookOpen,
@@ -8,6 +8,8 @@ import {
   FiFileText,
 } from "react-icons/fi";
 import { generateNotes } from "../services/api";
+import { useDispatch } from "react-redux";
+import { updateCredits } from "../redux/userSlice";
 
 const TopicForms = ({ setResult, loading, setLoading, setError, result }) => {
   const [topic, setTopic] = useState("");
@@ -16,6 +18,10 @@ const TopicForms = ({ setResult, loading, setLoading, setError, result }) => {
   const [revisionMode, setRevisionMode] = useState(false);
   const [includeDiagram, setIncludeDiagrams] = useState(false);
   const [includeChart, setIncludeCharts] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [progressText, setProgressText] = useState("");
+
+  const dispatch = useDispatch();
 
   const handelGeneratedResponse = async () => {
     if (!topic.trim()) {
@@ -43,14 +49,52 @@ const TopicForms = ({ setResult, loading, setLoading, setError, result }) => {
           response.data?.content ||
           response.data;
         setResult(notesContent);
+
+        if (typeof response.creditsLeft === "number") {
+          dispatch(updateCredits(response.creditsLeft));
+        }
       }
     } catch (error) {
       console.error("API Fetch Error:", error);
       setError("Failed to fetch notes from server");
     } finally {
       setLoading(false);
+      setTopic("");
+      setClassLevel("");
+      setExamType("");
+      setIncludeCharts(false);
+      setIncludeDiagrams(false);
+      setRevisionMode(false);
     }
   };
+
+  useEffect(() => {
+    if (!loading) {
+      setProgress(0);
+      setProgressText("");
+      return;
+    }
+
+    let value = 0;
+    setProgressText("Generating notes...");
+
+    const interval = setInterval(() => {
+      value += Math.random() * 8;
+
+      if (value >= 95) {
+        value = 95;
+        setProgressText("Almost done...");
+        clearInterval(interval);
+      } else if (value > 70) {
+        setProgressText("Finalizing notes...");
+      } else if (value > 40) {
+        setProgressText("Processing content...");
+      }
+      setProgress(Math.floor(value));
+    }, 700);
+
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -168,16 +212,69 @@ const TopicForms = ({ setResult, loading, setLoading, setError, result }) => {
             type="submit"
             disabled={!topic || loading}
             whileTap={!topic || loading ? {} : { scale: 0.98 }}
-            className={`w-full mt-4 py-3.5 px-6 rounded-xl font-semibold text-sm flex 
-                    items-center justify-center gap-2 text-black bg-white hover:bg-indigo-400/50 hover:text-indigo-200 transition-all 
-                    shadow-xl shadow-black/20 ${loading ? "bg-white/50 cursor-wait" : "cursor-pointer"}`}
+            className={`w-full mt-4 h-14 rounded-xl font-semibold text-sm relative overflow-hidden transition-all shadow-xl shadow-black/20 border border-white/5
+    ${
+      loading
+        ? "bg-white/[0.03] text-gray-400 cursor-wait"
+        : "bg-white text-black hover:bg-indigo-500 hover:text-white hover:border-indigo-400/30 cursor-pointer disabled:bg-white/10 disabled:text-gray-500 disabled:cursor-not-allowed"
+    }`}
           >
-            <FiCpu
-              size={22}
-              className={`text-cyan-500 ${loading ? "animate-spin" : ""}`}
-            />
-            <span>{loading ? "Generating..." : "Generate AI Framework"}</span>
+            {loading && (
+              <motion.div
+                className="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-green-500/20 via-emerald-500/20 to-green-600/20 -z-10"
+                initial={{ width: "0%" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ type: "spring", stiffness: 80, damping: 15 }}
+              />
+            )}
+
+            <div className="absolute inset-0 flex items-center justify-between px-6 pointer-events-none z-10">
+              {loading ? (
+                <>
+                  <div className="flex items-center gap-2.5">
+                    <FiCpu size={22} className="text-cyan-500 animate-spin" />
+                    <span className="text-sm font-medium text-gray-300 animate-pulse">
+                      {progressText || "Generating..."}
+                    </span>
+                  </div>
+
+                  <span className="text-sm font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
+                    {progress}%
+                  </span>
+                </>
+              ) : (
+                <div className="w-full flex items-center justify-center gap-2">
+                  <FiCpu size={22} className="text-cyan-500" />
+                  <span>Generate AI Framework</span>
+                </div>
+              )}
+            </div>
           </motion.button>
+          {loading && (
+            <motion.p
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-[11px] font-medium text-gray-500/80 leading-relaxed text-center flex items-center justify-center gap-1.5 mt-2.5 select-none"
+            >
+              <svg
+                className="w-3.5 h-3.5 text-gray-600 animate-pulse flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+              <span>
+                Please keep this window open. Framework compilation takes up to
+                2–5 minutes.
+              </span>
+            </motion.p>
+          )}
         </form>
       </motion.div>
 
