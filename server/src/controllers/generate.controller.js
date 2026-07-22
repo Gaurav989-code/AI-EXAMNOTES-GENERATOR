@@ -65,6 +65,7 @@ export const generateNotes = async (req, res) => {
     return res.status(201).json({
       success: true,
       data: newNote,
+      creditsLeft: user.credits,
     });
   } catch (error) {
     console.log("========== ERROR ==========");

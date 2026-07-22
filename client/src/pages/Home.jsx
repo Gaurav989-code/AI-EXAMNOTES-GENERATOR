@@ -48,23 +48,22 @@ const Home = () => {
               and revision-ready content using AI - faster, cleaner, and
               smarter.
             </motion.p>
-
-            <motion.button
-              onClick={() => navigate("/notes")}
-              whileHover={{ y: -10, rotateX: 8, rotateY: -8, scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{
-                type: "spring",
-                stiffness: 200,
-                damping: 18,
-              }}
-              className="mt-10 px-10 py-3 rounded-xl flex items-center gap-3 font-semibold text-lg text-white
+          </motion.div>
+          <motion.button
+            onClick={() => navigate("/notes")}
+            whileHover={{ y: -10, rotateX: 8, rotateY: -8, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 18,
+            }}
+            className="mt-10 px-10 py-3 rounded-xl flex items-center gap-3 font-semibold text-lg text-white
         bg-linear-to-r from-black/90 via-black/80 to-black/90 border
         border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.3)] cursor-pointer"
-            >
-              Get Started
-            </motion.button>
-          </motion.div>
+          >
+            Get Started
+          </motion.button>
         </div>
 
         {/* Right Column: Image Presentation */}
