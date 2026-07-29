@@ -16,7 +16,7 @@ import { ImPieChart } from "react-icons/im";
 
 // Shared Section Header component styled to match your dashboard theme
 const SectionHeader = ({ icon: Icon, title, children }) => (
-  <div className="mb-4 px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-100 to-cyan-50 text-cyan-700 font-semibold flex items-center justify-between text-sm tracking-wide">
+  <div className="mb-4 px-4 py-2 rounded-lg bg-linear-to-r from-cyan-100 to-cyan-50 text-cyan-700 font-semibold flex items-center justify-between text-sm tracking-wide">
     <div className="flex items-center gap-2">
       <Icon className="w-4 h-4" />
       <span>{title}</span>

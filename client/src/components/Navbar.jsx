@@ -91,7 +91,7 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 10, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="absolute mt-4 w-64 right-[-60px] rounded-2xl  bg-black/90
+                className="absolute mt-4 w-64 -right-15 rounded-2xl  bg-black/90
     backdrop-blur-xl border border-white/10
     shadow-[0_20px_60px_rgba(0,0,0,0.7)] p-4 text-white "
               >
