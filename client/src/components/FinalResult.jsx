@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import mermaid from "mermaid";
 import MermaidSetup from "./MermaidSetup";
 import ReChartSetup from "./ReChartSetup";
+import { downloadPdf } from "../services/api";
 
 const markDownComponent = {
   h1: ({ children }) => (
@@ -51,13 +52,16 @@ const FinalResult = ({ result }) => {
         <div className="grid grid-cols-2 gap-2 w-full md:flex md:w-auto">
           <button
             onClick={() => setQuickRevision(!quickRevision)}
-            className={`w-full md:w-auto px-3 py-2 text-center text-[11px] md:text-xs font-bold transition-colors tracking-wider uppercase rounded-lg shadow-sm border whitespace-nowrap min-h-[38px] flex items-center justify-center
+            className={`w-full cursor-pointer md:w-auto px-3 py-2 text-center text-[11px] md:text-xs font-bold transition-colors tracking-wider uppercase rounded-lg shadow-sm border whitespace-nowrap min-h-[38px] flex items-center justify-center
                       ${quickRevision ? "bg-green-400 text-black border-green-400 hover:bg-green-500" : "text-green-600 bg-white border-green-200 hover:bg-green-50"}`}
           >
             {quickRevision ? "exit revision mode" : "quick revision (5 min)"}
           </button>
 
-          <button className="w-full md:w-auto px-3 py-2 text-center text-[11px] md:text-xs font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors tracking-wider uppercase shadow-sm whitespace-nowrap min-h-[38px] flex items-center justify-center">
+          <button
+            onClick={() => downloadPdf(result)}
+            className="w-full md:w-auto px-3 py-2 text-center cursor-pointer text-[11px] md:text-xs font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors tracking-wider uppercase shadow-sm whitespace-nowrap min-h-[38px] flex items-center justify-center"
+          >
             Download Pdf
           </button>
         </div>
