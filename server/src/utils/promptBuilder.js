@@ -32,21 +32,21 @@ Include Charts: ${includeChart ? "YES" : "NO"}
 GLOBAL CONTENT RULES:
 - Use clear, simple, exam-oriented language.
 - Notes MUST be Markdown formatted. Headings and bullet points only, you can use paragraph, make visually impactful.
-- Keep the "notes" string brief (max 150 words) to avoid JSON payload cutting off.
+- Keep the "notes" string brief (max 300 words) to avoid JSON payload cutting off.
 
 REVISION MODE RULES (CRITICAL):
 - If REVISION MODE is ON:
-  - Notes must be VERY SHORT. Only bullet points. One-line answers only.
+  - Notes must be VERY SHORT (max 40 words). Only bullet points. Two-line answers only.
   - Definitions, formulas, keywords. No paragraphs. No explanations.
   - Content must feel like a last-day revision cheat sheet.
   - revisionPoints MUST summarize ALL important facts.
 - If REVISION MODE is OFF:
-  - Notes must be DETAILED but exam-focused. Max 2-4 lines per topic.
+  - Notes must be DETAILED but exam-focused. Max 4-5 lines per topic.
   - No storytelling, no extra theory.
 
 IMPORTANCE RULES:
 - Divide sub-topics into THREE categories:
-  - Imp1: High priority core chapters (Max 3 items)
+  - Imp1: High priority core chapters (Max 5 items)
   - Imp2: Medium priority chapters (Max 3 items)
   - Imp3: Low priority/frequent side topics (Max 3 items)
 - All three categories MUST be present.

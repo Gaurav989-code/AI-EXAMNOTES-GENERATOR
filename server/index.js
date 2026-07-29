@@ -8,6 +8,7 @@ import { connectDB } from "./src/utils/db.js";
 import authRouter from "./src/routes/auth.route.js";
 import userRouter from "./src/routes/user.route.js";
 import notesRouter from "./src/routes/generate.routes.js";
+import pdfRouter from "./src/routes/pdf.route.js";
 
 connectDB();
 
@@ -34,6 +35,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/notes", notesRouter);
+app.use("/api/pdf", pdfRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
