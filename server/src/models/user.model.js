@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
     },
     notes: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "Notes",
+      ref: "NotesModel",
       default: [],
     },
   },

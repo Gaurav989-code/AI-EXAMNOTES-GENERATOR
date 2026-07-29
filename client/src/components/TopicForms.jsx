@@ -5,7 +5,6 @@ import {
   FiLayers,
   FiCpu,
   FiCheck,
-  FiFileText,
 } from "react-icons/fi";
 import { generateNotes } from "../services/api";
 import { useDispatch } from "react-redux";
@@ -45,9 +44,7 @@ const TopicForms = ({ setResult, loading, setLoading, setError, result }) => {
 
       if (response && response.success) {
         const notesContent =
-          response.data?.content?.notes ||
-          response.data?.content ||
-          response.data;
+          response.data
         setResult(notesContent);
 
         if (typeof response.creditsLeft === "number") {
@@ -278,49 +275,7 @@ const TopicForms = ({ setResult, loading, setLoading, setError, result }) => {
         </form>
       </motion.div>
 
-      <div className="border-t border-white/5 pt-6 mt-8">
-        <AnimatePresence mode="wait">
-          {loading ? (
-            <motion.div
-              key="loading-state"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="space-y-3 p-6 rounded-xl bg-white/[0.01] border border-white/5 animate-pulse"
-            >
-              <div className="h-4 bg-white/10 rounded-md w-1/3" />
-              <div className="h-3 bg-white/5 rounded-md w-full" />
-              <div className="h-3 bg-white/5 rounded-md w-5/6" />
-            </motion.div>
-          ) : result ? (
-            <motion.div
-              key="result-content"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="p-6 rounded-xl bg-white/[0.02] border border-cyan-500/10 shadow-inner select-text selection:bg-cyan-500/20"
-            >
-              <div className="prose prose-invert max-w-none text-sm text-gray-300 leading-relaxed whitespace-pre-wrap">
-                {typeof result === "object"
-                  ? JSON.stringify(result, null, 2)
-                  : result}
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="empty-state"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex items-center gap-3 text-xs text-gray-500"
-            >
-              <FiFileText className="text-gray-600" size={16} />
-              <p>
-                Your generated frameworks and structured markdown study notes
-                will appear here.
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      
     </div>
   );
 };
