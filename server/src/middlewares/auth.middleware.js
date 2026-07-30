@@ -20,7 +20,9 @@ const authMiddleware = (req, res, next) => {
       });
     }
 
+    // FIX: Populate BOTH properties to ensure all your controller files work smoothly!
     req.userId = decoded.userId;
+    req.user = decoded.userId;
 
     next();
   } catch (error) {
@@ -30,6 +32,13 @@ const authMiddleware = (req, res, next) => {
       return res
         .status(401)
         .json({ success: false, message: "Token expired." });
+    }
+
+    if (!res.headersSent) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication failed. Invalid session.",
+      });
     }
   }
 };
