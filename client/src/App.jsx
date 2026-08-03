@@ -15,7 +15,7 @@ import Contact from "./pages/Contact";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFailed from "./pages/PaymentFailed";
 
-export const serverUrl = "http://localhost:8000";
+export const serverUrl = "https://ai-examnotes-generatorserver.onrender.com";
 
 const App = () => {
   const dispatch = useDispatch();
