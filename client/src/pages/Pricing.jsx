@@ -182,7 +182,7 @@ function PricingCard({
 
       <div>
         <h3 className="font-extrabold text-xl text-gray-100 mb-2">{title}</h3>
-        <p className="text-xs text-gray-400 leading-relaxed min-h-[36px]">
+        <p className="text-xs text-gray-400 leading-relaxed min-h-9">
           {description}
         </p>
 

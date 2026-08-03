@@ -40,7 +40,7 @@ const PaymentSuccess = () => {
 
   return (
     <div className="w-full min-h-screen bg-zinc-950 text-white font-sans flex items-center justify-center px-4 selection:bg-cyan-500/30">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-87.5 h-87.5 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -48,7 +48,7 @@ const PaymentSuccess = () => {
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
         className="w-full max-w-md p-6 md:p-8 rounded-3xl bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/80 shadow-[0_24px_50px_-20px_rgba(0,0,0,0.5)] text-center relative overflow-hidden"
       >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-linear-to-r from-transparent via-cyan-400 to-transparent" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-linear-to-r from-transparent via-cyan-400 to-transparent" />
 
         <motion.div
           initial={{ scale: 0, rotate: -45 }}

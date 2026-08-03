@@ -10,7 +10,7 @@ const PaymentFailed = () => {
     <div className="w-full min-h-screen bg-zinc-950 text-white font-sans flex items-center justify-center px-4 selection:bg-rose-500/30">
       
       {/* Background Terror Glow Radial Flare */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-rose-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-87.5 h-87.5 bg-rose-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Main Error Container Box Wrapper */}
       <motion.div
@@ -20,7 +20,7 @@ const PaymentFailed = () => {
         className="w-full max-w-md p-6 md:p-8 rounded-3xl bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/80 shadow-[0_24px_50px_-20px_rgba(0,0,0,0.5)] text-center relative overflow-hidden"
       >
         {/* Animated Banner Header Accents */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-linear-to-r from-transparent via-rose-500 to-transparent" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-linear-to-r from-transparent via-rose-500 to-transparent" />
 
         {/* Error Cross Circle Icon */}
         <motion.div
