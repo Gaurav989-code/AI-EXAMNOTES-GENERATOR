@@ -48,7 +48,7 @@ const Footer = () => {
       className="relative mt-20 border-t border-white/5 bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] text-gray-400"
     >
       {/* Top Border Glow Accent */}
-      <div className="absolute top-0 left-1/2 -z-10 h-px w-full max-w-7xl -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
+      <div className="absolute top-0 left-1/2 -z-10 h-px w-full max-w-7xl -translate-x-1/2 bg-linear-to-r from-transparent via-cyan-500/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-8 py-16">
         {/* Top Grid */}
