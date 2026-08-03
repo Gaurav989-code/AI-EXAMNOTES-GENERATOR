@@ -9,10 +9,18 @@ import authRouter from "./src/routes/auth.route.js";
 import userRouter from "./src/routes/user.route.js";
 import notesRouter from "./src/routes/generate.routes.js";
 import pdfRouter from "./src/routes/pdf.route.js";
+import creditRouter from "./src/routes/credits.route.js";
+import { stripeWebhook } from "./src/controllers/credits.controller.js";
 
 connectDB();
 
 const app = express();
+
+app.post(
+  "/api/credits/webhook",
+  express.raw({ type: "application/json" }),
+  stripeWebhook,
+);
 
 app.use(
   cors({
@@ -36,6 +44,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/notes", notesRouter);
 app.use("/api/pdf", pdfRouter);
+app.use("/api/credits", creditRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

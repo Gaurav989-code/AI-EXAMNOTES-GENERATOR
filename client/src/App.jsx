@@ -12,6 +12,8 @@ import Pricing from "./pages/Pricing";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentFailed from "./pages/PaymentFailed";
 
 export const serverUrl = "http://localhost:8000";
 
@@ -58,6 +60,9 @@ const App = () => {
         path="/contact"
         element={userData ? <Contact /> : <Navigate to="/auth" replace />}
       />
+      <Route path="/payment-success" element={<PaymentSuccess />} />
+      <Route path="/payment-failed" element={<PaymentFailed />} />
+    
     </Routes>
   );
 };
